@@ -119,7 +119,9 @@
 		var end = txtarea.selectionEnd;
 		var scrollTop = txtarea.scrollTop;
 		var scrollLeft = txtarea.scrollLeft;
-		var sel = txtarea.value.substring(start, end);
+		
+		//var sel = txtarea.value.substring(start, end);
+		alert(txtarea.selectionStart);
 		//txtarea.value =  txtarea.value.substring(0,start) + rep + ToolbarTextarea.value.substring(end,len);
 		txtarea.scrollTop = scrollTop;
 		txtarea.scrollLeft = scrollLeft;
@@ -174,6 +176,20 @@
 			}
 			cmntToolbar.insertBefore(cryptSpan, cmntToolbar.lastChild);
 			cmntsmToolbar.insertBefore(cryptSpan2, cmntsmToolbar.lastChild);
+			
+			if(win.location.pathname.toString().indexOf('/b/res/') != -1)
+			{
+				var areply = document.querySelectorAll("a.postbtn-reply-href");
+				if(areply.length > 0)
+				{
+					var fz = win.getComputedStyle(areply[0], null).getPropertyValue('font-size');
+					if(fz.indexOf('px') != -1)
+					{
+						styleSheet.insertRule('.postbtn-reply-href { font-size: 0px; }', 0);
+						styleSheet.insertRule('.postbtn-reply-href::after { font-size: '+fz+'; content: attr(name); }', 0);
+					}
+				}
+			}
 		}
 	});
 	//----------------[/Внедряемся в панель кнопок]----------------//
